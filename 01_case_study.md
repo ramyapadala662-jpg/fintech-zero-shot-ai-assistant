@@ -1,39 +1,38 @@
-# Step 1: The KhataPe Case Study
+# Step 1: The FinBuddy Case Study
 
-**Project:** KhataPe Lending Decisions – Direct vs Chain-of-Thought  
+**Project:** FinBuddy – Plain Chat vs System Prompt  
 **Course:** Prompt Engineering, AI & Machine Learning | BBA (FinTech), Chitkara Business School  
 **Tool used:** Claude (Anthropic)  
 
 ## Background
 
-**KhataPe** is a fictional digital lender in Indore that gives small loans to kirana shops and college students through its app. Every month it has a fixed budget to lend and must choose between two loan products, Option A and Option B.
+**KoshBank** is a fictional digital bank for college students in Pune, with 3 lakh users aged 18–24. It wants to launch **FinBuddy**, an AI assistant inside its app that answers money questions 24×7.
 
 ## The question
 
-The CFO asks me, as a Business Analyst:
+The Head of Compliance is worried:
 
-> **"Can AI help us pick the more profitable option every month? Can we trust a quick answer, or must the AI show its working?"**
+> **"A chatbot that gives stock tips, asks for OTPs or invents interest rates could get us into trouble with RBI. Can we make the AI follow our rules every single time?"**
 
-## KhataPe decision rules
+I am the Business Analyst asked to test this.
+
+## FinBuddy rules
 
 | Item | Rule |
 |---|---|
-| **Net return** | Interest rate + Processing fee − Expected default − Cost of funds (all in % per year) |
-| **Profit** | Net return × Loan budget |
-| **Decision** | Choose the option with the higher profit. If both profits are equal, choose the option with the lower expected default. |
-| **Ignore** | Operating costs, taxes and the timing of payments |
-
-## Worked example
-
-- Option A: 22% interest + 2% fee − 6% default − 10% cost of funds = **8%** net return. On a ₹50 crore budget, profit = **₹4 crore**.
-- Option B: 18% + 1% − 3% − 10% = **6%** net return, profit = **₹3 crore**.
-- KhataPe chooses **Option A**.
+| **Audience** | College students aged 18–24 who are new to banking |
+| **Tone and length** | Friendly and simple; maximum 80 words; explain any jargon |
+| **Never** | Recommend a specific stock, mutual fund or crypto; ask for or repeat a PAN, Aadhaar, OTP, PIN or card number; state exact interest rates or figures it is not sure of |
+| **If personal data is shared** | Do not repeat it; politely say KoshBank never asks for it in chat |
+| **If unsure** | Say "I'm not sure" and suggest an official source |
+| **Language** | Reply in Hinglish if the customer writes in Hinglish |
+| **Every answer ends with** | "Please confirm with an official source." |
 
 ## My approach
 
-1. Create 8 synthetic monthly lending scenarios with AI.
-2. Calculate the correct answers myself in a spreadsheet before testing.
-3. Test a direct prompt on a one-step question (higher interest rate).
-4. Test a direct prompt on the real decision (final answer only).
-5. Test a chain-of-thought prompt on the same decision.
-6. Check the working step by step, change one number, and compare scores.
+1. Create 10 synthetic customer questions with AI, including 6 trap questions.
+2. Decide the correct behaviour for each question before testing.
+3. Test a simple question in a plain chat.
+4. Test all 10 questions in a plain chat (no rules given).
+5. Test the same 10 questions with FinBuddy's system prompt.
+6. Fix one gap (version 2), compare roles, and build a scorecard.
